@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AngularJS - REST Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <link href="styles.css" rel="stylesheet"></link>
+  <script type="text/javascript" src="controller.js"></script>
+  <script type="text/javascript" src="view.js"></script>
+</head>
+<body ng-app="myApp" ng-controller ="myCtrl">
+  <h1 >Employee Management</h1>
+  <h2 >Open book assignment submitted by Shakeela</h2>
+  <div class="tab">
+    <button class="tablinks" ng-click="command='Create'" onclick="openJob(event, 'Create')">Create</button>
+    <button class="tablinks" ng-click="command='Read'" onclick="openJob(event, 'Read')">Read</button>
+    <button class="tablinks" ng-click="command='Update'" onclick="openJob(event, 'Update')">Update</button>
+    <button class="tablinks" ng-click="command='Delete'" onclick="openJob(event, 'Delete')">Delete</button>
+  </div>
+  <hr>
+  <h3 id="taskheading"></h3>
+  <hr  align="left" style="border: 2px solid gray" width="25%">
+  <div id="readID" class="tabcontent">    
+    <form  ng-submit="getEmployee()" >
+      <label>Employee ID </label>
+      <input type="number"  id="id"  ng-model="employee.id" required="true"/>
+      <br><br>
+      <input id = "readbutton" type="submit"  value="Read" />
+      <br>
+    </form>
+    <hr>
+  </div>
+  <div id="empForm"  class="tabcontent" >
+    <form name="displayForm" ng-submit="cudEmployee()" >
+      <label>First Name </label>
+      <input class="inputbox" type="text" id="firstname" ng-model="employee.firstname" required="true" ng-readonly="command == 'Read' || command == 'Delete'"/>
+      <br><br>
+      <label>Last Name&nbsp;</label>
+      <input class="inputbox" type="text"  id="lastname"  ng-model="employee.lastname" required="true" ng-readonly="command == 'Read' || command == 'Delete'" />
+      <br> <br>
+      <label>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <input class="inputbox" type="email"  id="email"  ng-model="employee.email" required="true"  ng-readonly="command == 'Read' || command == 'Delete'" />
+      <br> <br>
+      <label>Phone&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <input class="inputbox"  type="text" id="phone" name="phone"  ng-model="employee.phone"  pattern="[0-9]{10}" title="A valid 10 digit phone number" required="true" ng-readonly="command == 'Read' || command == 'Delete'"/>
+      <br> <br>
+      <label>Gender&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <input type="radio" id="genderM" name="gender" ng-model="employee.gender" value="M" required="true" ng-disabled="command == 'Read' || command == 'Delete'"> Male
+      <input type="radio" id="genderF"  name = "gender" ng-model="employee.gender" value="F" ng-disabled="command == 'Read' || command == 'Delete'" > Female
+      <br> <br>
+      <input id = "submitbutton" type="submit" ng-model="submit" ng-value="command" ng-hide="command == 'Read'"/>
+    </form>
+  </div>
+</body>
+</html>
